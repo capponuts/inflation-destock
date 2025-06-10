@@ -22,10 +22,10 @@ export const metadata = {
     siteName: "Inflation Destock 85",
     images: [
       {
-        url: "/logo-inflation-destock-85.png",
-        width: 800,
-        height: 800,
-        alt: "Logo Inflation Destock 85"
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Aperçu du site Inflation Destock 85 - logo et catégories principales"
       }
     ],
     locale: "fr_FR",

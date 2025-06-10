@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Home as HomeIcon, Heart, Smartphone, Shirt, Zap, Flame } from "lucide-react";

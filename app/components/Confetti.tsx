@@ -42,10 +42,12 @@ const Confetti = () => {
     color: i % 2 === 0 ? '#e6c343' : '#44a5ae',
   }));
 
-  const mouseConfetti = !isMobile ? Array.from({ length: 5 }).map((_, i) => ({
+  const mouseConfetti = !isMobile ? Array.from({ length: 8 }).map((_, i) => ({
     id: `mouse-${i}`,
     color: i % 2 === 0 ? '#e6c343' : '#44a5ae',
-    size: Math.random() * 4 + 2,
+    size: Math.random() * 3 + 2,
+    angle: (i * 45) % 360, // Répartition en cercle
+    distance: Math.random() * 15 + 5, // Distance aléatoire du centre
   })) : [];
 
   return (
@@ -73,28 +75,34 @@ const Confetti = () => {
         />
       ))}
       
-      {!isMobile && mouseConfetti.map((c, i) => (
-        <motion.div
-          key={c.id}
-          className="absolute rounded-full"
-          style={{
-            backgroundColor: c.color,
-            width: c.size,
-            height: c.size,
-            x: mousePosition.x + (i * 10 - 20),
-            y: mousePosition.y + (i * 10 - 20),
-          }}
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            delay: i * 0.2,
-          }}
-        />
-      ))}
+      {!isMobile && mouseConfetti.map((c) => {
+        const radians = (c.angle * Math.PI) / 180;
+        const x = Math.cos(radians) * c.distance;
+        const y = Math.sin(radians) * c.distance;
+        
+        return (
+          <motion.div
+            key={c.id}
+            className="absolute rounded-full"
+            style={{
+              backgroundColor: c.color,
+              width: c.size,
+              height: c.size,
+              x: mousePosition.x + x,
+              y: mousePosition.y + y,
+            }}
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              delay: c.angle / 360,
+            }}
+          />
+        );
+      })}
     </div>
   );
 };

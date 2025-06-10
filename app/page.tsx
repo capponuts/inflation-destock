@@ -67,14 +67,20 @@ export default function Home() {
         {categories.map((cat, i) => (
           <motion.div
             key={cat.label}
-            className={`flex flex-col items-center p-4 rounded-xl shadow-md ${cat.color} text-white w-32`}
-            whileHover={{ scale: 1.08, rotate: -2 }}
+            className={`flex flex-col items-center p-4 rounded-xl shadow-md ${cat.color} text-white w-32 group cursor-pointer`}
+            whileHover={{ 
+              scale: 1.08, 
+              rotate: -2,
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+            }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 + i * 0.1, duration: 0.5 }}
           >
-            {cat.icon}
-            <span className="mt-2 font-semibold text-lg text-white drop-shadow">{cat.label}</span>
+            <div className="group-hover:scale-110 transition-transform">
+              {cat.icon}
+            </div>
+            <span className="mt-2 font-semibold text-lg text-white drop-shadow group-hover:text-[#222] transition-colors">{cat.label}</span>
           </motion.div>
         ))}
       </motion.div>
